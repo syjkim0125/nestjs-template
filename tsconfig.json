@@ -17,6 +17,8 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "paths": {}
+    "paths": {
+      "@user-grpc/*": ["apps/user-grpc/src/users/*"]
+    }
   }
 }
