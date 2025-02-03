@@ -11,6 +11,11 @@ export class AuthController {
     return this.authService.getHello();
   }
 
+  @Post('/query')
+  testQuery() {
+    return this.authService.query();
+  }
+
   @Post()
   create(@Body() dto: FindOrCreateUserRequest) {
     return this.authService.create(dto);
