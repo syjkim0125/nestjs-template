@@ -18,7 +18,7 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@user-grpc/*": ["apps/user-grpc/*"],
+      "@user-grpc/*": ["apps/user-grpc/src/*"],
       "@app/common": ["libs/common/src"],
       "@app/common/*": ["libs/common/src/*"]
     }

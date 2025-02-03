@@ -3,7 +3,7 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { join } from 'path';
 
 import { USER } from '@app/common';
-import { UserGrpcModule } from '@user-grpc/src/user-grpc.module';
+import { UserGrpcModule } from '@user-grpc/user-grpc.module';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
