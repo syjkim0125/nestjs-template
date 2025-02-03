@@ -1,35 +1,38 @@
 import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
-import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { Observable } from 'rxjs';
+
+import { UsersService } from '@user-grpc/users/users.service';
+import {
+  FindOneUserDto,
+  FindOrCreateUserRequest,
+  PaginationDto,
+  SoftDeleteUserRequest,
+  UserServiceController,
+  UserServiceControllerMethods,
+} from '@app/common';
 
 @Controller()
-export class UsersController {
+@UserServiceControllerMethods()
+export class UsersController implements UserServiceController {
   constructor(private readonly usersService: UsersService) {}
 
-  @MessagePattern('createUser')
-  create(@Payload() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  findOrCreateUser(findOrCreateUserRequest: FindOrCreateUserRequest) {
+    return this.usersService.findOrCreateUser(findOrCreateUserRequest);
   }
 
-  @MessagePattern('findAllUsers')
-  findAll() {
+  softDeleteUser(softDeleteUserRequest: SoftDeleteUserRequest) {
+    return this.usersService.remove(softDeleteUserRequest.userId);
+  }
+
+  findOneUser(findOneUserDto: FindOneUserDto) {
+    return this.usersService.findOne(findOneUserDto.id);
+  }
+
+  findAllUsers() {
     return this.usersService.findAll();
   }
 
-  @MessagePattern('findOneUser')
-  findOne(@Payload() id: number) {
-    return this.usersService.findOne(id);
-  }
-
-  @MessagePattern('updateUser')
-  update(@Payload() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(updateUserDto.id, updateUserDto);
-  }
-
-  @MessagePattern('removeUser')
-  remove(@Payload() id: number) {
-    return this.usersService.remove(id);
+  queryUsers(paginationDtoStream: Observable<PaginationDto>) {
+    return this.usersService.queryUsers(paginationDtoStream);
   }
 }
