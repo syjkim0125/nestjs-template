@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  auth:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: auth
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=production
+      - USER_GRPC_URL=user-grpc:5000
+    depends_on:
+      - user-grpc
+
+  user:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: user
+    ports:
+      - '3001:3001'
+    environment:
+      - NODE_ENV=production
+
+  user-grpc:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: user-grpc
+    environment:
+      - NODE_ENV=production
+
+networks:
+  default:
+    name: nest-microservices

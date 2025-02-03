@@ -14,6 +14,7 @@ import { USER_PACKAGE_NAME } from '@app/common';
         name: USER_SERVICE,
         transport: Transport.GRPC,
         options: {
+          url: process.env.USER_GRPC_URL || 'user-grpc:5000',
           package: USER_PACKAGE_NAME,
           protoPath: join(__dirname, '../user.proto'),
         },

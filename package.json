@@ -7,6 +7,11 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
+    "build:all": "nest build auth && nest build user && nest build user-grpc",
+    "build auth": "nest build auth",
+    "build user": "nest build user",
+    "build user-grpc": "nest build user-grpc",
+    "build common": "nest build common",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
