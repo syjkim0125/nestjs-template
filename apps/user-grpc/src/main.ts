@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { join } from 'path';
 
-import { USER } from '@app/common';
+import { USER_PACKAGE_NAME } from '@app/common';
 import { UserGrpcModule } from '@user-grpc/user-grpc.module';
 
 async function bootstrap() {
@@ -12,7 +12,7 @@ async function bootstrap() {
       transport: Transport.GRPC,
       options: {
         protoPath: join(__dirname, '../user.proto'),
-        package: USER,
+        package: USER_PACKAGE_NAME,
       },
     },
   );
