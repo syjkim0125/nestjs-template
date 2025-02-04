@@ -19,6 +19,7 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@user-grpc/*": ["apps/user-grpc/src/*"],
+      "@user/*": ["apps/user/src/*"],
       "@common": ["libs/common/src"],
       "@common/*": ["libs/common/src/*"],
       "@user-common": ["libs/user-common/src"],
