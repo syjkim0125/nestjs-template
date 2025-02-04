@@ -19,10 +19,10 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@user-grpc/*": ["apps/user-grpc/src/*"],
-      "@app/common": ["libs/common/src"],
-      "@app/common/*": ["libs/common/src/*"],
-      "@app/user-common": ["libs/user-common/src"],
-      "@app/user-common/*": ["libs/user-common/src/*"]
+      "@common": ["libs/common/src"],
+      "@common/*": ["libs/common/src/*"],
+      "@user-common": ["libs/user-common/src"],
+      "@user-common/*": ["libs/user-common/src/*"]
     }
   }
 }
