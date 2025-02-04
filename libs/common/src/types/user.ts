@@ -62,8 +62,6 @@ export interface SoftDeleteUserResponse {
   success: boolean;
 }
 
-export const USER_PACKAGE_NAME = 'user';
-
 export interface UserServiceClient {
   findOrCreateUser(request: FindOrCreateUserRequest): Observable<UserResponse>;
 

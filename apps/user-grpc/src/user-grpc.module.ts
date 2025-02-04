@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
-
+import { CommonModule } from '@common/common.module';
 import { UsersModule } from '@user-grpc/users/users.module';
 
 @Module({
-  imports: [UsersModule],
+  imports: [
+    CommonModule,
+    UsersModule,
+  ],
   controllers: [],
   providers: [],
 })

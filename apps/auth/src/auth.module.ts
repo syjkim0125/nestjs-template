@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join } from 'path';
+import { CommonModule } from '@common/common.module';
 
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { USER_SERVICE } from './constants';
-import { USER_PACKAGE_NAME } from '@common';
 
 @Module({
   imports: [
@@ -15,11 +15,12 @@ import { USER_PACKAGE_NAME } from '@common';
         transport: Transport.GRPC,
         options: {
           url: process.env.USER_GRPC_URL || 'user-grpc:5000',
-          package: USER_PACKAGE_NAME,
+          package: process.env.USER_PACKAGE_NAME,
           protoPath: join(__dirname, '../user.proto'),
         },
       },
     ]),
+    CommonModule,
   ],
   controllers: [AuthController],
   providers: [AuthService],
