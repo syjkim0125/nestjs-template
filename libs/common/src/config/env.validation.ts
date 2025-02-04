@@ -1,7 +1,8 @@
 import { z } from 'zod';
 
 export const envSchema = z.object({
-  PORT: z.string().transform(Number).default('3000'),
+  USER_PORT: z.string().transform(Number).default('3001'),
+  AUTH_PORT: z.string().transform(Number).default('3000'),
   DB_HOST: z.string().default('localhost'),
   DB_PORT: z.string().transform(Number).default('3306'),
   DB_USERNAME: z.string(),
