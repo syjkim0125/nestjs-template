@@ -7,7 +7,7 @@ import {
   User,
   UserResponse,
   Users,
-} from '@app/common';
+} from '@common';
 import { randomUUID } from 'crypto';
 import { Observable, Subject } from 'rxjs';
 
