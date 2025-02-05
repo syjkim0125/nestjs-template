@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-import { UserCommonService } from './user-common.service';
-import { DomainModule } from './domain/domain.module';
-import { InfrastructureModule } from './infrastructure/infrastructure.module';
+
+import { InfrastructureModule } from '@user-common/infrastructure/infrastructure.module';
+
+import { DomainModule } from '@user-common/domain/domain.module';
 
 @Module({
-  providers: [UserCommonService],
-  exports: [UserCommonService],
   imports: [DomainModule, InfrastructureModule],
+  exports: [DomainModule, InfrastructureModule],
 })
 export class UserCommonModule {}

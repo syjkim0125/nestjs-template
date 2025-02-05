@@ -6,31 +6,63 @@ services:
       context: .
       dockerfile: Dockerfile
       target: auth
+    env_file:
+      - .env
     ports:
       - '3000:3000'
-    environment:
-      - NODE_ENV=production
-      - USER_GRPC_URL=user-grpc:5000
     depends_on:
-      - user-grpc
+      db:
+        condition: service_healthy
+      user-grpc:
+        condition: service_started
 
   user:
     build:
       context: .
       dockerfile: Dockerfile
       target: user
+    env_file:
+      - .env
     ports:
       - '3001:3001'
-    environment:
-      - NODE_ENV=production
+    depends_on:
+      db:
+        condition: service_healthy
 
   user-grpc:
     build:
       context: .
       dockerfile: Dockerfile
       target: user-grpc
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    container_name: template-db
+    image: mariadb:11.6.2
+    env_file:
+      - .env
     environment:
-      - NODE_ENV=production
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - '3307:3306'
+    volumes:
+      - dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 5s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  dbdata:
 
 networks:
   default:

@@ -8,7 +8,7 @@ import {
   PaginationDto,
   USER_SERVICE_NAME,
   UserServiceClient,
-} from '@app/common';
+} from '@common';
 
 @Injectable()
 export class AuthService implements OnModuleInit {
