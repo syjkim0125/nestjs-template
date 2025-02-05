@@ -1,6 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ClsPluginTransactional } from '@nestjs-cls/transactional';
+import { ClsModule } from 'nestjs-cls';
+import { TransactionalAdapterTypeOrm } from '@nestjs-cls/transactional-adapter-typeorm';
+import { DataSource } from 'typeorm';
 import { CommonModule } from '@common/common.module';
 
 @Module({
@@ -22,6 +26,18 @@ import { CommonModule } from '@common/common.module';
           autoLoadEntities: true,
         };
       },
+    }),
+    // cls
+    ClsModule.forRoot({
+      global: true,
+      plugins: [
+        new ClsPluginTransactional({
+          imports: [TypeOrmModule],
+          adapter: new TransactionalAdapterTypeOrm({
+            dataSourceToken: DataSource,
+          }),
+        }),
+      ],
     }),
   ],
 })
