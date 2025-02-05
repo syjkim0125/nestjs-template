@@ -11,9 +11,10 @@ services:
     ports:
       - '3000:3000'
     depends_on:
-      - db
-      - user-grpc
-
+      db:
+        condition: service_healthy
+      user-grpc:
+        condition: service_started
 
   user:
     build:
@@ -25,7 +26,8 @@ services:
     ports:
       - '3001:3001'
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   user-grpc:
     build:
@@ -35,7 +37,8 @@ services:
     env_file:
       - .env
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:
     container_name: template-db
@@ -52,7 +55,8 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "db", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
       interval: 5s
       timeout: 5s
       retries: 3
