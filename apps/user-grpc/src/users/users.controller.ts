@@ -9,7 +9,7 @@ import {
   SoftDeleteUserRequest,
   UserServiceController,
   UserServiceControllerMethods,
-} from '@app/common';
+} from '@common';
 
 @Controller()
 @UserServiceControllerMethods()

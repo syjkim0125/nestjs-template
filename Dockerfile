@@ -9,7 +9,7 @@ RUN npm i -g pnpm
 COPY package.json pnpm-lock.yaml ./
 
 # apps와 libs 디렉토리 생성
-RUN mkdir -p apps/auth apps/user apps/user-grpc libs/common
+RUN mkdir -p apps/auth apps/user apps/user-grpc libs/common libs/user-common
 
 # 의존성 설치
 RUN pnpm install
