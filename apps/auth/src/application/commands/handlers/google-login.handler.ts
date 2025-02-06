@@ -6,7 +6,7 @@ import { LoginResult } from '@auth/application/commands/types/login.type';
 import { GoogleLoginCommand } from '@auth/application/commands/impl/google-login.command';
 import { GoogleLoginCommandResult } from '@auth/application/commands/impl/google-login.result';
 import { IJwtProvider } from '@auth/application/ports/jwt/jwt.provider.interface';
-import { UserService } from '@auth/application/commands/sevices/user.service';
+import { IUserGrpcPort } from '@auth/application/ports/grpc/user.grpc.interface';
 import { AuthService } from '@auth/application/commands/sevices/auth.service';
 import { OauthService } from '@auth/application/commands/sevices/oauth.service';
 
@@ -17,7 +17,8 @@ export class GoogleLoginHandler implements ICommandHandler<GoogleLoginCommand> {
   constructor(
     @Inject('IJwtProvider')
     private readonly jwtProvider: IJwtProvider,
-    private readonly userService: UserService,
+    @Inject('IUserGrpcPort')
+    private readonly userGrpcPort: IUserGrpcPort,
     private readonly authService: AuthService,
     private readonly oauthService: OauthService,
   ) {}
@@ -41,16 +42,16 @@ export class GoogleLoginHandler implements ICommandHandler<GoogleLoginCommand> {
     name: string,
   ): Promise<LoginResult> {
     // 1) 유저 찾거나 생성
-    const user = await this.userService.findOrCreateUser(googleId, email, name);
+    const user = await this.userGrpcPort.findOrCreateUser(googleId, email, name);
 
     const expiresInSeconds = this.jwtProvider.getRefreshTokenExpiresInSeconds();
     const auth = await this.authService.createAuth(
-      user.getId(),
+      user.id,
       expiresInSeconds,
     );
 
     const oauth = await this.oauthService.createOauth(
-      user.getId(),
+      user.id,
       email,
       name,
       Provider.GOOGLE,
@@ -58,8 +59,8 @@ export class GoogleLoginHandler implements ICommandHandler<GoogleLoginCommand> {
 
     // 2) 토큰 생성
     const tokens = await this.jwtProvider.issueTokens({
-      sub: user.getId(),
-      email: user.getEmail(),
+      sub: user.id,
+      email: user.email,
       sessionId: auth.getId(),
     });
 
@@ -68,9 +69,9 @@ export class GoogleLoginHandler implements ICommandHandler<GoogleLoginCommand> {
 
     return {
       userProfile: {
-        googleId: user.getGoogleId(),
-        email: user.getEmail(),
-        name: user.getName(),
+        googleId: user.googleId,
+        email: user.email,
+        name: user.name,
       },
       accessToken: tokens.accessToken,
       refreshToken: tokens.refreshToken,
