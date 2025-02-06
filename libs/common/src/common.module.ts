@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+
 import { envSchema, EnvVars } from '@common/config/env.validation';
+import { JwtAuthGuard } from '@common/guards/jwt-auth.guard';
+import { JwtStrategy } from '@common/strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -11,6 +14,10 @@ import { envSchema, EnvVars } from '@common/config/env.validation';
       validate: (env): EnvVars => CommonModule.validateEnv(env),
     }),
   ],
+  providers: [
+    JwtAuthGuard,
+    JwtStrategy,
+  ]
 })
 
 export class CommonModule {
