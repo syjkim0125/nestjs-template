@@ -1,39 +1,63 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { Observable, Subject } from 'rxjs';
 
 import {
   FindOrCreateUserRequest,
   PaginationDto,
   SoftDeleteUserResponse,
   User,
-  UserResponse,
   Users,
+  UserStatus as ProtoUserStatus,
 } from '@common';
-import { randomUUID } from 'crypto';
-import { Observable, Subject } from 'rxjs';
+import { IUserRepository } from '@user-common/domain/repositories/user.repository.interface';
+import { UserFactory } from '@user-common/domain/factories/user.factory';
+import { UserStatus } from '@user-common/domain/models/enums/user-status';
 
 @Injectable()
 export class UsersService {
+  constructor(
+    @Inject('IUserRepository')
+    private readonly userRepository: IUserRepository,
+    private readonly userFactory: UserFactory,
+  ) {}
   private readonly users: User[] = [];
 
-  findOrCreateUser(
+  public async findOrCreateUser(
     findOrCreateUserRequest: FindOrCreateUserRequest,
-  ): UserResponse {
-    const user: User = {
-      id: randomUUID(),
-      subscribed: false,
-      socialMedia: {},
-      username: findOrCreateUserRequest.name,
-      age: 1,
-      password: '22',
+  ): Promise<User> {
+    const {googleId, email, name} = findOrCreateUserRequest;
+    const existingUser = await this.userRepository.findByGoogleId(googleId);
+    if (existingUser) return {
+      id: existingUser.getId(),
+      googleId: existingUser.getGoogleId(),
+      email: existingUser.getEmail(),
+      name: existingUser.getName(),
+      status: this.domainToProtoStatus(existingUser.getStatus()),
     };
-    this.users.push(user);
+
+    const userId = this.userRepository.nextId();
+    const user = this.userFactory.create(userId, googleId, email, name);
+
+    await this.userRepository.save(user);
+
     return {
-      id: user.id,
-      googleId: findOrCreateUserRequest.googleId,
-      email: findOrCreateUserRequest.email,
-      name: user.username,
-      status: 'ACTIVE',
+      id: user.getId(),
+      googleId: user.getGoogleId(),
+      email: user.getEmail(),
+      name: user.getName(),
+      status: this.domainToProtoStatus(user.getStatus()),
     };
+  }
+
+  private domainToProtoStatus(domainUserStatus: UserStatus): ProtoUserStatus {
+    switch (domainUserStatus) {
+      case UserStatus.ACTIVE:
+        return ProtoUserStatus.ACTIVE; // 0
+      case UserStatus.DELETED:
+        return ProtoUserStatus.DELETED; // 1
+      case UserStatus.PENDING:
+        return ProtoUserStatus.PENDING; // 2
+    }
   }
 
   findAll(): Users {

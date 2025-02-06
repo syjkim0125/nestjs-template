@@ -3,7 +3,7 @@ syntax = "proto3";
 package user;
 
 service UserService {
-  rpc FindOrCreateUser(FindOrCreateUserRequest) returns (UserResponse) {}
+  rpc FindOrCreateUser(FindOrCreateUserRequest) returns (User) {}
   rpc SoftDeleteUser(SoftDeleteUserRequest) returns (SoftDeleteUserResponse) {}
   rpc FindAllUsers(Empty) returns (Users) {}
   rpc FindOneUser(FindOneUserDto) returns (User) {}
@@ -25,32 +25,24 @@ message Users {
     repeated User users = 1;
 }
 
-message User {
-    string id = 1;
-    string username = 2;
-    string password = 3;
-    int32 age = 4;
-    bool subscribed = 5;
-    SocialMedia socialMedia = 6;
-}
-
-message SocialMedia {
-    optional string twitterUri = 1;
-    optional string facebookUri = 2;
-}
-
 message FindOrCreateUserRequest {
   string googleId = 1;
   string email = 2;
   string name = 3;
 }
 
-message UserResponse {
+message User {
   string id = 1;
   string googleId = 2;
   string email = 3;
   string name = 4;
-  string status = 5; // ACTIVE, DELETED, ...
+  UserStatus status = 5; // ACTIVE, DELETED, ...
+}
+
+enum UserStatus {
+  ACTIVE = 0;
+  DELETED = 1;
+  PENDING = 2;
 }
 
 message SoftDeleteUserRequest {

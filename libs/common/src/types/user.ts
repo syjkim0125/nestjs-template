@@ -5,12 +5,20 @@
 // source: proto/user.proto
 
 /* eslint-disable */
-import { GrpcMethod, GrpcStreamMethod } from '@nestjs/microservices';
-import { Observable } from 'rxjs';
+import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
+import { Observable } from "rxjs";
 
-export const protobufPackage = 'user';
+export const protobufPackage = "user";
 
-export interface Empty {}
+export enum UserStatus {
+  ACTIVE = 0,
+  DELETED = 1,
+  PENDING = 2,
+  UNRECOGNIZED = -1,
+}
+
+export interface Empty {
+}
 
 export interface FindOneUserDto {
   id: string;
@@ -25,33 +33,19 @@ export interface Users {
   users: User[];
 }
 
-export interface User {
-  id: string;
-  username: string;
-  password: string;
-  age: number;
-  subscribed: boolean;
-  socialMedia: SocialMedia | undefined;
-}
-
-export interface SocialMedia {
-  twitterUri?: string | undefined;
-  facebookUri?: string | undefined;
-}
-
 export interface FindOrCreateUserRequest {
   googleId: string;
   email: string;
   name: string;
 }
 
-export interface UserResponse {
+export interface User {
   id: string;
   googleId: string;
   email: string;
   name: string;
   /** ACTIVE, DELETED, ... */
-  status: string;
+  status: UserStatus;
 }
 
 export interface SoftDeleteUserRequest {
@@ -62,12 +56,12 @@ export interface SoftDeleteUserResponse {
   success: boolean;
 }
 
-export interface UserServiceClient {
-  findOrCreateUser(request: FindOrCreateUserRequest): Observable<UserResponse>;
+export const USER_PACKAGE_NAME = "user";
 
-  softDeleteUser(
-    request: SoftDeleteUserRequest,
-  ): Observable<SoftDeleteUserResponse>;
+export interface UserServiceClient {
+  findOrCreateUser(request: FindOrCreateUserRequest): Observable<User>;
+
+  softDeleteUser(request: SoftDeleteUserRequest): Observable<SoftDeleteUserResponse>;
 
   findAllUsers(request: Empty): Observable<Users>;
 
@@ -77,16 +71,11 @@ export interface UserServiceClient {
 }
 
 export interface UserServiceController {
-  findOrCreateUser(
-    request: FindOrCreateUserRequest,
-  ): Promise<UserResponse> | Observable<UserResponse> | UserResponse;
+  findOrCreateUser(request: FindOrCreateUserRequest): Promise<User> | Observable<User> | User;
 
   softDeleteUser(
     request: SoftDeleteUserRequest,
-  ):
-    | Promise<SoftDeleteUserResponse>
-    | Observable<SoftDeleteUserResponse>
-    | SoftDeleteUserResponse;
+  ): Promise<SoftDeleteUserResponse> | Observable<SoftDeleteUserResponse> | SoftDeleteUserResponse;
 
   findAllUsers(request: Empty): Promise<Users> | Observable<Users> | Users;
 
@@ -97,36 +86,17 @@ export interface UserServiceController {
 
 export function UserServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = [
-      'findOrCreateUser',
-      'softDeleteUser',
-      'findAllUsers',
-      'findOneUser',
-    ];
+    const grpcMethods: string[] = ["findOrCreateUser", "softDeleteUser", "findAllUsers", "findOneUser"];
     for (const method of grpcMethods) {
-      const descriptor: any = Reflect.getOwnPropertyDescriptor(
-        constructor.prototype,
-        method,
-      );
-      GrpcMethod('UserService', method)(
-        constructor.prototype[method],
-        method,
-        descriptor,
-      );
+      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
+      GrpcMethod("UserService", method)(constructor.prototype[method], method, descriptor);
     }
-    const grpcStreamMethods: string[] = ['queryUsers'];
+    const grpcStreamMethods: string[] = ["queryUsers"];
     for (const method of grpcStreamMethods) {
-      const descriptor: any = Reflect.getOwnPropertyDescriptor(
-        constructor.prototype,
-        method,
-      );
-      GrpcStreamMethod('UserService', method)(
-        constructor.prototype[method],
-        method,
-        descriptor,
-      );
+      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
+      GrpcStreamMethod("UserService", method)(constructor.prototype[method], method, descriptor);
     }
   };
 }
 
-export const USER_SERVICE_NAME = 'UserService';
+export const USER_SERVICE_NAME = "UserService";
