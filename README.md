@@ -37,3 +37,9 @@ $ docker compose exec app sh
 # you should enter the password in .env file
 $ docker compose exec db mariadb -u [user_name] -p 
 ```
+
+## [proto-gen]
+```bash
+# you should move to generate file in types directory
+$ protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./ --ts_proto_opt=nestJs=true ./proto/[proto_file_name]
+```
