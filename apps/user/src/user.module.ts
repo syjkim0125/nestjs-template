@@ -9,7 +9,6 @@ import { UserCommonModule } from '@user-common';
 import { HttpControllers } from '@user/interface/controllers/http';
 
 import { QueryHandlers } from '@user/application/queries/handlers';
-import { ApplicationServices } from '@user/application/services';
 
 const globalAppGuards = [
   {
@@ -25,6 +24,6 @@ const globalAppGuards = [
     UserCommonModule,
   ],
   controllers: [...HttpControllers],
-  providers: [...globalAppGuards, ...QueryHandlers, ...ApplicationServices],
+  providers: [...globalAppGuards, ...QueryHandlers],
 })
 export class UserModule {}
