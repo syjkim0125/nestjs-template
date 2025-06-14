@@ -32,7 +32,6 @@ export class UserRepository implements IUserRepository {
   }
 
   public async save(user: User): Promise<void> {
-    user.setVersion(user.getVersion() + 1);
     const userEntity = this.userMapper.toEntity(user);
     await this.userRepository.save(userEntity);
   }

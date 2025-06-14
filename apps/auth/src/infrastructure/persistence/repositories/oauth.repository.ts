@@ -27,7 +27,6 @@ export class OauthRepository implements IOauthRepository {
   }
 
   public async save(user: Oauth): Promise<void> {
-    user.setVersion(user.getVersion() + 1);
     const userEntity = this.oauthMapper.toEntity(user);
     await this.oauthRepository.save(userEntity);
   }
