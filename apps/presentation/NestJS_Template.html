@@ -1,10 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <!-- saved from url=(0110)http://127.0.0.1:3000/proto/NestJS%20Template%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EB%B0%9C%ED%91%9C.html -->
-<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" src="./NestJS Template 프로젝트 발표_files/___vscode_livepreview_injected_script"></script>
-    
-    <script type="text/javascript" src="./NestJS Template 프로젝트 발표_files/___vscode_livepreview_injected_script(1)"></script>
+<html lang="ko">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script
+      type="text/javascript"
+      src="./NestJS Template 프로젝트 발표_files/___vscode_livepreview_injected_script"
+    ></script>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script
+      type="text/javascript"
+      src="./NestJS Template 프로젝트 발표_files/___vscode_livepreview_injected_script(1)"
+    ></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NestJS Template 프로젝트 발표</title>
     <style>
       * {
@@ -242,22 +251,7 @@
         <div class="center">
           <h1>🚀 NestJS Template 프로젝트</h1>
           <h3>마이크로서비스 + Onion Architecture + CQRS</h3>
-
-          <div class="author-info">
-            <p><strong>김종건</strong></p>
-            <p><strong>2025.06.16</strong></p>
-          </div>
         </div>
-
-        <!--
-        🎯 발표자 스크립트:
-        - 인사말: "안녕하세요, 오늘은 제가 설계하고 구현한 NestJS 기반 마이크로서비스 템플릿 프로젝트에 대해 발표하겠습니다."
-        - 프로젝트 목적: "이 프로젝트는 확장 가능하고 유지보수가 용이한 백엔드 아키텍처를 구현하는 것이 목표였습니다."
-        - 핵심 키워드: "Onion Architecture, CQRS, 마이크로서비스, gRPC, JWT, OAuth 2.0"
-
-        💡 면접 예상 질문: "왜 NestJS를 선택했나요?"
-        답변: "Express.js는 미니멀한 프레임워크로 자유도가 높지만, 대규모 프로젝트에서는 구조화가 어렵습니다. NestJS는 Angular에서 영감을 받은 모듈 시스템, 의존성 주입 컨테이너, 데코레이터 기반 메타데이터 프로그래밍을 제공합니다. 또한 TypeScript를 완전 지원하여 컴파일 타임에 오류를 잡을 수 있고, Swagger 자동 생성, 가드/인터셉터/필터 등의 AOP 기능을 기본 제공합니다. 특히 마이크로서비스 아키텍처에서 gRPC, TCP, Redis 등 다양한 전송 계층을 지원하는 것이 큰 장점입니다."
-        -->
       </div>
 
       <!-- Slide 2: 프로젝트 개요 -->
@@ -291,78 +285,6 @@
             <strong>Optimistic Lock 경험</strong> - 동시성 제어, 성능 최적화
           </li>
         </ul>
-
-        <!--
-        🎯 마이크로서비스 아키텍처 발표자 스크립트:
-        - 서비스 분리 기준: "도메인 경계(auth, user)와 통신 프로토콜(HTTP, gRPC)을 기준으로 3개 서비스로 분리했습니다."
-        - 독립 배포: "각 서비스가 독립적인 Docker 컨테이너로 실행되어 개별 배포와 스케일링이 가능합니다."
-        - 장애 격리: "한 서비스의 장애가 다른 서비스에 전파되지 않도록 Circuit Breaker 패턴을 고려했습니다."
-
-        💡 면접 예상 질문: "마이크로서비스의 단점과 해결 방법은?"
-        답변: "주요 단점은 1) 네트워크 지연: gRPC로 성능 최적화, 2) 분산 트랜잭션: Saga 패턴으로 해결, 3) 운영 복잡도: Docker Compose로 로컬 개발 환경 통일, 4) 데이터 일관성: 이벤트 기반 최종 일관성 적용. 하지만 팀 독립성, 기술 스택 다양성, 확장성의 이점이 더 크다고 판단했습니다."
-
-        🔧 기술적 세부사항: 서비스 디스커버리, API Gateway, 분산 추적, 헬스체크, 로드밸런싱
-
-        🎯 모노레포 관리 발표자 스크립트:
-        - pnpm workspace: "pnpm workspace를 사용해 3개 서비스와 2개 공유 라이브러리를 효율적으로 관리합니다."
-        - 코드 공유: "common 라이브러리로 공통 유틸리티, user-common으로 도메인 특화 로직을 공유합니다."
-        - 의존성 관리: "중복 설치 방지와 버전 일관성을 보장하여 디스크 사용량을 70% 절약했습니다."
-
-        💡 면접 예상 질문: "모노레포 vs 멀티레포 장단점은?"
-        답변: "모노레포 장점: 1) 원자적 커밋으로 여러 패키지 동시 변경, 2) 코드 공유 용이, 3) 일관된 도구와 설정, 4) 리팩토링 시 전체 영향도 파악 가능. 단점: 1) 저장소 크기 증가, 2) 빌드 시간 증가, 3) 권한 관리 복잡. 하지만 마이크로서비스에서는 서비스 간 인터페이스 변경 시 원자적 업데이트가 중요해 모노레포를 선택했습니다."
-
-        🔧 기술적 세부사항: pnpm workspace, Lerna vs Nx 비교, 빌드 캐싱, 선택적 빌드
-
-        🎯 도메인 경계 기반 서비스 분리 발표자 스크립트:
-        - DDD 적용: "Domain-Driven Design을 적용해 인증(auth)과 사용자 관리(user) 도메인을 명확히 분리했습니다."
-        - 프로토콜 선택: "외부 API는 HTTP/REST, 내부 통신은 gRPC를 사용해 성능과 타입 안전성을 확보했습니다."
-        - 경계 컨텍스트: "각 서비스가 자체 데이터베이스를 가져 데이터 소유권을 명확히 했습니다."
-
-        💡 면접 예상 질문: "서비스 분리 기준과 gRPC 선택 이유는?"
-        답변: "서비스 분리 기준: 1) 비즈니스 기능의 응집도, 2) 데이터 변경 빈도, 3) 팀 구조, 4) 확장 요구사항. gRPC 선택 이유: 1) Protocol Buffers로 타입 안전성 보장, 2) HTTP/2 기반으로 성능 우수, 3) 스트리밍 지원, 4) 다양한 언어 지원. 단점인 브라우저 직접 호출 불가는 API Gateway로 해결했습니다."
-
-        🔧 기술적 세부사항: Protocol Buffers, gRPC-Web, 서비스 메시, API Gateway 패턴
-
-        🎯 OAuth 2.0 & JWT 인증 발표자 스크립트:
-        - 토큰 기반 인증: "세션 대신 JWT를 사용해 무상태(stateless) 인증을 구현했습니다."
-        - 보안 설계: "액세스 토큰은 응답으로 전달, 리프레시 토큰은 HttpOnly 쿠키로 XSS 공격을 방지했습니다."
-        - OAuth 2.0 플로우: "Authorization Code Flow를 구현해 안전한 소셜 로그인을 제공합니다."
-
-        💡 면접 예상 질문: "JWT vs Session 차이와 보안 고려사항은?"
-        답변: "JWT 장점: 1) 서버 메모리 사용 없음, 2) 마이크로서비스 간 토큰 공유 용이, 3) 수평 확장 유리. 단점: 1) 토큰 크기 큼, 2) 즉시 무효화 어려움. 보안 고려사항: 1) 짧은 만료 시간(15분), 2) 리프레시 토큰 로테이션, 3) HTTPS 필수, 4) XSS/CSRF 방지를 위한 HttpOnly 쿠키 사용."
-
-        🔧 기술적 세부사항: RS256 알고리즘, 토큰 로테이션, PKCE, 소셜 로그인 연동
-
-        🎯 NestJS 프레임워크 발표자 스크립트:
-        - 의존성 주입: "IoC 컨테이너를 통해 느슨한 결합과 테스트 용이성을 확보했습니다."
-        - 모듈 시스템: "기능별 모듈화로 코드 구조를 명확히 하고 재사용성을 높였습니다."
-        - 데코레이터 패턴: "메타데이터 기반 선언적 프로그래밍으로 보일러플레이트 코드를 줄였습니다."
-
-        💡 면접 예상 질문: "Express vs NestJS 차이와 의존성 주입의 장점은?"
-        답변: "Express는 미니멀한 웹 프레임워크로 자유도가 높지만 구조화가 어렵습니다. NestJS는 엔터프라이즈급 애플리케이션을 위한 구조화된 프레임워크입니다. 의존성 주입 장점: 1) 테스트 시 Mock 객체 주입 용이, 2) 런타임에 구현체 교체 가능, 3) 순환 의존성 해결, 4) 싱글톤 패턴 자동 관리."
-
-        🔧 기술적 세부사항: Reflect-metadata, @Injectable 데코레이터, Provider 스코프, 순환 의존성 해결
-
-        🎯 CQRS 패턴 발표자 스크립트:
-        - 명령/조회 분리: "데이터 변경(Command)과 조회(Query)를 분리해 각각 최적화했습니다."
-        - 이벤트 기반: "도메인 이벤트를 통해 서비스 간 느슨한 결합을 구현했습니다."
-        - 성능 최적화: "읽기 전용 모델을 별도로 구성해 조회 성능을 향상시켰습니다."
-
-        💡 면접 예상 질문: "CQRS를 언제 사용하고 이벤트 소싱과의 차이는?"
-        답변: "CQRS 적용 시점: 1) 읽기/쓰기 성능 요구사항이 다를 때, 2) 복잡한 비즈니스 로직이 있을 때, 3) 다양한 조회 요구사항이 있을 때. 이벤트 소싱과의 차이: CQRS는 명령/조회 분리 패턴이고, 이벤트 소싱은 상태 변경을 이벤트로 저장하는 방식입니다. 함께 사용하면 시너지가 있지만 독립적으로도 사용 가능합니다."
-
-        🔧 기술적 세부사항: Command/Query Handler, Event Bus, Read Model, Projection
-
-        🎯 Optimistic Lock 발표자 스크립트:
-        - 동시성 제어: "버전 필드를 사용해 동시 수정 시 충돌을 감지하고 처리합니다."
-        - 성능 최적화: "Pessimistic Lock 대비 대기 시간 없이 높은 처리량을 달성했습니다."
-        - 충돌 처리: "충돌 발생 시 재시도 로직과 사용자 알림으로 데이터 무결성을 보장합니다."
-
-        💡 면접 예상 질문: "Pessimistic Lock과의 차이와 충돌 처리 방법은?"
-        답변: "Pessimistic Lock은 데이터를 미리 잠가 충돌을 방지하지만 성능 저하와 데드락 위험이 있습니다. Optimistic Lock은 충돌을 감지해 처리하는 방식으로 성능이 우수하지만 충돌 처리 로직이 필요합니다. 충돌 처리: 1) 자동 재시도(최대 3회), 2) 사용자에게 최신 데이터 표시, 3) 충돌 로그 기록, 4) 비즈니스 로직에 따른 병합 전략 적용."
-
-        🔧 기술적 세부사항: @Version 어노테이션, OptimisticLockException, CAS 연산, 재시도 전략
-        -->
       </div>
 
       <!-- Slide 3: NestJS 소개 -->
@@ -382,15 +304,15 @@
 
         <h3>🎨 주요 구성 요소</h3>
         <div class="code-block">
-          @Controller('users')<br>
-          export class UserController {<br>
-          &nbsp;&nbsp;constructor(private userService: UserService) {}<br>
-          <br>
-          &nbsp;&nbsp;@Get(':id')<br>
-          &nbsp;&nbsp;@UseGuards(JwtAuthGuard)<br>
-          &nbsp;&nbsp;async getUser(@Param('id') id: string) {<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;return this.userService.findById(id);<br>
-          &nbsp;&nbsp;}<br>
+          @Controller('users')<br />
+          export class UserController {<br />
+          &nbsp;&nbsp;constructor(private userService: UserService) {}<br />
+          <br />
+          &nbsp;&nbsp;@Get(':id')<br />
+          &nbsp;&nbsp;@UseGuards(JwtAuthGuard)<br />
+          &nbsp;&nbsp;async getUser(@Param('id') id: string) {<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;return this.userService.findById(id);<br />
+          &nbsp;&nbsp;}<br />
           }
         </div>
 
@@ -400,37 +322,6 @@
           <strong>Filter</strong> 등의 구성 요소로 깔끔한 아키텍처 구성
         </p>
       </div>
-
-      <!-- <div class="speaker-notes">
-          <h4>🎯 발표자 스크립트</h4>
-          <ul>
-            <li>
-              <strong>Angular 영감:</strong> "NestJS는 Angular의 아키텍처에서
-              영감을 받아 백엔드에 적용한 프레임워크입니다."
-            </li>
-            <li>
-              <strong>Decorator의 힘:</strong> "Reflect-metadata를 활용해
-              런타임에 메타데이터를 읽어 의존성 주입, 라우팅, 검증 등을
-              자동화합니다."
-            </li>
-            <li>
-              <strong>확장성:</strong> "모듈 시스템으로 기능을 캡슐화하고,
-              필요에 따라 마이크로서비스로 분리할 수 있습니다."
-            </li>
-          </ul>
-
-          <div class="interview-tip">
-            <strong>💡 면접 예상 질문:</strong> "Express.js와 NestJS의
-            차이점은?" → "Express는 미니멀한 웹 프레임워크이고, NestJS는
-            엔터프라이즈급 애플리케이션을 위한 구조화된 프레임워크입니다."
-          </div>
-
-          <div class="tech-detail">
-            <strong>🔧 기술적 세부사항:</strong> TypeScript 5.0+ 지원, ES2022
-            타겟, 실험적 Decorator 사용
-          </div>
-        </div>
-        -->
 
       <!-- Slide 4: IOC/DI -->
       <div class="slide">
@@ -448,36 +339,24 @@
 
         <h3>⚙️ NestJS 구현</h3>
         <div class="code-block">
-          @Injectable()<br>
-          export class AuthService {<br>
-          &nbsp;&nbsp;constructor(<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;@Inject('IAuthRepository')<br>
+          @Injectable()<br />
+          export class AuthService {<br />
+          &nbsp;&nbsp;constructor(<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;@Inject('IAuthRepository')<br />
           &nbsp;&nbsp;&nbsp;&nbsp;private readonly authRepository:
-          IAuthRepository,<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;private readonly jwtProvider: IJwtProvider,<br>
-          &nbsp;&nbsp;) {}<br>
-          }<br>
-          <br>
-          // Module에서 Provider 등록<br>
-          providers: [<br>
+          IAuthRepository,<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;private readonly jwtProvider: IJwtProvider,<br />
+          &nbsp;&nbsp;) {}<br />
+          }<br />
+          <br />
+          // Module에서 Provider 등록<br />
+          providers: [<br />
           &nbsp;&nbsp;{ provide: 'IAuthRepository', useClass: AuthRepository
-          },<br>
-          &nbsp;&nbsp;JwtProvider,<br>
+          },<br />
+          &nbsp;&nbsp;JwtProvider,<br />
           ]
         </div>
       </div>
-
-      <!-- Slide 4 발표자 스크립트
-      🎯 발표자 스크립트:
-      - IOC 개념: "전통적으로 객체가 직접 의존성을 생성했다면, IOC에서는 외부 컨테이너가 의존성을 주입합니다."
-      - DI 장점: "테스트 용이성, 결합도 감소, 코드 재사용성 향상을 제공합니다."
-      - NestJS 구현: "@Injectable 데코레이터로 주입 가능한 클래스를 표시하고, 생성자에서 의존성을 받습니다."
-
-      💡 면접 예상 질문: "DI Container의 장단점은?"
-      답변: "장점으로는 객체 간 결합도 감소, 테스트 용이성(Mock 객체 주입), 설정 중앙화, 객체 생명주기 관리 자동화가 있습니다. 단점으로는 런타임 오류 가능성(컴파일 타임에 발견 어려움), 복잡성 증가, 성능 오버헤드, 디버깅 어려움이 있습니다. NestJS는 TypeScript 데코레이터를 활용해 컴파일 타임 검증을 강화했습니다."
-
-      🔧 기술적 세부사항: Reflect Metadata API, 데코레이터 메타데이터, Provider 스코프(Singleton, Request, Transient)
-      -->
 
       <!-- Slide 5: DIP -->
       <div class="slide">
@@ -499,42 +378,30 @@
 
         <h3>🏗️ 실제 구현 예시</h3>
         <div class="code-block">
-          // Domain Layer - Interface 정의<br>
-          export interface IAuthRepository {<br>
+          // Domain Layer - Interface 정의<br />
+          export interface IAuthRepository {<br />
           &nbsp;&nbsp;findById(sessionId: string): Promise&lt;Auth |
-          null&gt;;<br>
-          &nbsp;&nbsp;save(auth: Auth): Promise&lt;void&gt;;<br>
-          }<br>
-          <br>
-          // Infrastructure Layer - 구현체<br>
-          @Injectable()<br>
-          export class AuthRepository implements IAuthRepository {<br>
-          &nbsp;&nbsp;constructor(<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;@InjectRepository(AuthEntity)<br>
+          null&gt;;<br />
+          &nbsp;&nbsp;save(auth: Auth): Promise&lt;void&gt;;<br />
+          }<br />
+          <br />
+          // Infrastructure Layer - 구현체<br />
+          @Injectable()<br />
+          export class AuthRepository implements IAuthRepository {<br />
+          &nbsp;&nbsp;constructor(<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;@InjectRepository(AuthEntity)<br />
           &nbsp;&nbsp;&nbsp;&nbsp;private readonly authRepository:
-          Repository&lt;AuthEntity&gt;<br>
-          &nbsp;&nbsp;) {}<br>
-          }<br>
-          <br>
-          // Application Layer - 인터페이스에 의존<br>
-          constructor(<br>
-          &nbsp;&nbsp;@Inject('IAuthRepository')<br>
-          &nbsp;&nbsp;private readonly authRepository: IAuthRepository<br>
+          Repository&lt;AuthEntity&gt;<br />
+          &nbsp;&nbsp;) {}<br />
+          }<br />
+          <br />
+          // Application Layer - 인터페이스에 의존<br />
+          constructor(<br />
+          &nbsp;&nbsp;@Inject('IAuthRepository')<br />
+          &nbsp;&nbsp;private readonly authRepository: IAuthRepository<br />
           ) {}
         </div>
       </div>
-
-      <!-- Slide 5 발표자 스크립트
-      🎯 발표자 스크립트:
-      - DIP vs DI 차이: "DI는 구현 기법이고, DIP는 설계 원칙입니다. DIP는 SOLID 원칙 중 하나로, 고수준 모듈이 저수준 모듈에 의존하지 않도록 하는 원칙입니다."
-      - 실제 적용: "도메인 계층에서 IAuthRepository 인터페이스를 정의하고, 인프라 계층에서 구현합니다. 이로써 도메인이 데이터베이스 기술에 의존하지 않습니다."
-      - 테스트 이점: "실제 데이터베이스 없이도 Mock Repository로 비즈니스 로직을 테스트할 수 있습니다."
-
-      💡 면접 예상 질문: "DIP를 적용하지 않으면 어떤 문제가 발생하나요?"
-      답변: "고수준 모듈이 저수준 모듈에 직접 의존하면 다음 문제가 발생합니다: 1) 데이터베이스 변경 시 비즈니스 로직도 수정 필요, 2) 단위 테스트 시 실제 DB 필요로 테스트 속도 저하, 3) 코드 재사용성 감소, 4) 계층 간 강한 결합으로 유지보수 어려움. DIP를 적용하면 인터페이스를 통해 추상화하여 이런 문제들을 해결할 수 있습니다."
-
-      🔧 기술적 세부사항: Repository Pattern, Port-Adapter Pattern, Interface Segregation
-      -->
 
       <!-- Slide 6: Onion Architecture -->
       <div class="slide">
@@ -555,50 +422,38 @@
         <div class="architecture-diagram">
           <div class="layer">
             <div class="layer-box infrastructure-layer">
-              Infrastructure Layer<br>(Repositories, Adapters, DB)
+              Infrastructure Layer<br />(Repositories, Adapters, DB)
             </div>
           </div>
           <div class="flow-arrow">↓</div>
           <div class="layer">
             <div class="layer-box interface-layer">
-              Interface Layer<br>(Controllers, Guards, Filters)
+              Interface Layer<br />(Controllers, Guards, Filters)
             </div>
           </div>
           <div class="flow-arrow">↓</div>
           <div class="layer">
             <div class="layer-box application-layer">
-              Application Layer<br>(Commands, Queries, Handlers)
+              Application Layer<br />(Commands, Queries, Handlers)
             </div>
           </div>
           <div class="flow-arrow">↓</div>
           <div class="layer">
             <div class="layer-box domain-layer">
-              Domain Layer<br>(Entities, Value Objects, Events)
+              Domain Layer<br />(Entities, Value Objects, Events)
             </div>
           </div>
         </div>
 
         <div class="code-block">
-          // Domain Layer - 순수 비즈니스 로직<br>
-          export class User extends AggregateRoot {<br>
-          &nbsp;&nbsp;public updateEmail(newEmail: string): void {<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;this.email = new EmailVO(newEmail);<br>
-          &nbsp;&nbsp;}<br>
+          // Domain Layer - 순수 비즈니스 로직<br />
+          export class User extends AggregateRoot {<br />
+          &nbsp;&nbsp;public updateEmail(newEmail: string): void {<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;this.email = new EmailVO(newEmail);<br />
+          &nbsp;&nbsp;}<br />
           }
         </div>
       </div>
-
-      <!-- Slide 6 발표자 스크립트
-      🎯 발표자 스크립트:
-      - Clean Architecture와의 차이: "Onion Architecture는 Clean Architecture의 구체적 구현체로, 계층을 동심원으로 표현합니다."
-      - 의존성 방향: "모든 의존성은 안쪽(도메인)을 향하며, 외부 계층은 내부 계층의 인터페이스에만 의존합니다."
-      - 실제 적용: "각 서비스마다 4개 계층으로 구성하여 관심사를 명확히 분리했습니다."
-
-      💡 면접 예상 질문: "Layered Architecture와의 차이점은?"
-      답변: "Layered는 상위 계층이 하위 계층에 의존하지만, Onion은 모든 계층이 도메인에 의존하여 의존성을 역전시킵니다."
-
-      🔧 기술적 세부사항: DDD Aggregate Root 패턴, Value Object 활용, Domain Event 발행
-      -->
 
       <!-- Slide 7: 프로젝트 구조 -->
       <div class="slide">
@@ -606,14 +461,14 @@
 
         <h3>🏢 모노레포 구성</h3>
         <div class="code-block">
-          nestjs-template/<br>
-          ├── apps/<br>
-          │ ├── auth/ # 인증 서비스<br>
-          │ ├── user/ # 사용자 HTTP API (external)<br>
-          │ └── user-grpc/ # 사용자 gRPC 서비스 (internal)<br>
-          ├── libs/<br>
-          │ ├── common/ # 공통 라이브러리<br>
-          │ └── user-common/ # 사용자 도메인 공통 (Shared Database)<br>
+          nestjs-template/<br />
+          ├── apps/<br />
+          │ ├── auth/ # 인증 서비스<br />
+          │ ├── user/ # 사용자 HTTP API (external)<br />
+          │ └── user-grpc/ # 사용자 gRPC 서비스 (internal)<br />
+          ├── libs/<br />
+          │ ├── common/ # 공통 라이브러리<br />
+          │ └── user-common/ # 사용자 도메인 공통 (Shared Database)<br />
           └── proto/ # gRPC 프로토콜 정의
         </div>
 
@@ -651,18 +506,6 @@
         </table>
       </div>
 
-      <!-- Slide 7 발표자 스크립트
-      🎯 발표자 스크립트:
-      - 모노레포 선택 이유: "코드 공유, 일관된 의존성 관리, 원자적 커밋이 가능하여 마이크로서비스 개발에 적합합니다."
-      - pnpm workspace: "npm/yarn 대비 디스크 공간 절약과 빠른 설치 속도를 제공합니다."
-      - 공유 라이브러리 전략: "common은 범용적, user-common은 도메인 특화로 분리하여 응집도를 높였습니다."
-
-      💡 면접 예상 질문: "모노레포의 단점은?"
-      답변: "빌드 시간 증가, 저장소 크기 증가, 권한 관리 복잡성이 있지만, 도구와 전략으로 해결 가능합니다."
-
-      🔧 기술적 세부사항: TypeScript path mapping, 순환 의존성 방지, 빌드 최적화
-      -->
-
       <!-- Slide 8: gRPC 통신 -->
       <div class="slide active">
         <h2>⚡ gRPC 통신</h2>
@@ -683,25 +526,27 @@
 
         <h3>📋 Proto 정의</h3>
         <div class="code-block">
-          service UserService {<br>
+          service UserService {<br />
           &nbsp;&nbsp;rpc FindOrCreateUser(FindOrCreateUserRequest) returns
-          (User) {}<br>
+          (User) {}<br />
           &nbsp;&nbsp;rpc SoftDeleteUser(SoftDeleteUserRequest) returns
-          (SoftDeleteUserResponse) {}<br>
+          (SoftDeleteUserResponse) {}<br />
           &nbsp;&nbsp;rpc QueryUsers(stream PaginationDto) returns (stream
-          Users) {}<br>
-          }<br>
-          <br>
-          message User {<br>
-          &nbsp;&nbsp;string id = 1;<br>
-          &nbsp;&nbsp;string email = 2;<br>
-          &nbsp;&nbsp;UserStatus status = 3;<br>
+          Users) {}<br />
+          }<br />
+          <br />
+          message User {<br />
+          &nbsp;&nbsp;string id = 1;<br />
+          &nbsp;&nbsp;string email = 2;<br />
+          &nbsp;&nbsp;UserStatus status = 3;<br />
           }
         </div>
 
         <p>
-          <strong>외부 클라이언트 → auth 서비스 (REST) → user-grpc 서비스
-            (gRPC)</strong>
+          <strong
+            >외부 클라이언트 → auth 서비스 (REST) → user-grpc 서비스
+            (gRPC)</strong
+          >
         </p>
 
         <h3>💡 통신 패턴 분리 이유</h3>
@@ -712,18 +557,6 @@
           </li>
         </ul>
       </div>
-
-      <!-- Slide 8 발표자 스크립트
-      🎯 발표자 스크립트:
-      - API Gateway 패턴: "외부 클라이언트는 REST API로 접근하고, 내부 서비스 간에는 gRPC로 통신합니다. 이렇게 분리하면 외부 호환성과 내부 성능을 모두 확보할 수 있습니다."
-      - 서비스 계약 관리: ".proto 파일이 팀 간 명확한 계약서 역할을 하며, 컴파일 타임에 API 변경사항을 검증해 런타임 오류를 방지합니다."
-      - 운영 효율성: "HTTP/2 기반으로 하나의 연결에서 여러 요청을 동시 처리하고, 자동 로드밸런싱과 헬스체크로 안정성을 보장합니다."
-
-      💡 면접 예상 질문: "마이크로서비스에서 REST 대신 gRPC를 선택한 기준은?"
-      답변: "외부 API는 REST로 호환성을 보장하고, 내부 통신은 gRPC로 성능을 최적화했습니다. 특히 서비스 간 빈번한 호출이 있는 경우 gRPC의 HTTP/2 멀티플렉싱과 바이너리 프로토콜이 큰 장점을 제공합니다."
-
-      🔧 기술적 세부사항: Connection pooling, Deadline propagation, 서비스 디스커버리 통합
-      -->
 
       <!-- Slide 9: CQRS 패턴 -->
       <div class="slide">
@@ -738,40 +571,28 @@
 
         <h3>🎯 구현 예시</h3>
         <div class="code-block">
-          // Command<br>
-          @CommandHandler(GoogleLoginCommand)<br>
-          export class GoogleLoginHandler {<br>
-          &nbsp;&nbsp;async execute(command: GoogleLoginCommand) {<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;// 사용자 생성/업데이트 로직<br>
+          // Command<br />
+          @CommandHandler(GoogleLoginCommand)<br />
+          export class GoogleLoginHandler {<br />
+          &nbsp;&nbsp;async execute(command: GoogleLoginCommand) {<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;// 사용자 생성/업데이트 로직<br />
           &nbsp;&nbsp;&nbsp;&nbsp;const user = await
-          this.userGrpc.findOrCreateUser(...);<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;return this.jwtProvider.issueTokens(user);<br>
-          &nbsp;&nbsp;}<br>
-          }<br>
-          <br>
-          // Query<br>
-          @QueryHandler(GetUserQuery)<br>
-          export class GetUserHandler {<br>
-          &nbsp;&nbsp;async execute(query: GetUserQuery) {<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;// 읽기 전용 조회<br>
+          this.userGrpc.findOrCreateUser(...);<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;return this.jwtProvider.issueTokens(user);<br />
+          &nbsp;&nbsp;}<br />
+          }<br />
+          <br />
+          // Query<br />
+          @QueryHandler(GetUserQuery)<br />
+          export class GetUserHandler {<br />
+          &nbsp;&nbsp;async execute(query: GetUserQuery) {<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;// 읽기 전용 조회<br />
           &nbsp;&nbsp;&nbsp;&nbsp;return
-          this.userQuery.findById(query.userId);<br>
-          &nbsp;&nbsp;}<br>
+          this.userQuery.findById(query.userId);<br />
+          &nbsp;&nbsp;}<br />
           }
         </div>
       </div>
-
-      <!-- Slide 9 발표자 스크립트
-      🎯 발표자 스크립트:
-      - CQRS vs Event Sourcing: "CQRS는 읽기/쓰기 분리 패턴이고, Event Sourcing은 상태를 이벤트로 저장하는 패턴입니다. 독립적으로 사용 가능합니다."
-      - NestJS CQRS 모듈: "CommandBus, QueryBus, EventBus를 제공하여 메시지 기반 아키텍처를 쉽게 구현할 수 있습니다."
-      - 실제 적용: "인증 로직에서 로그인(Command)과 사용자 조회(Query)를 명확히 분리했습니다."
-
-      💡 면접 예상 질문: "CQRS 도입 시 고려사항은?"
-      답변: "데이터 일관성, 복잡성 증가, 중복 코드 등을 고려해야 하며, 복잡한 도메인에서만 적용하는 것이 좋습니다."
-
-      🔧 기술적 세부사항: RxJS Observable 기반 이벤트 처리, 메모리 내 이벤트 버스
-      -->
 
       <!-- Slide 10: Saga 패턴 -->
       <div class="slide">
@@ -790,16 +611,16 @@
 
         <h3>🔄 구현 예시</h3>
         <div class="code-block">
-          @Injectable()<br>
-          export class UserLogoutSaga {<br>
-          &nbsp;&nbsp;@Saga()<br>
-          &nbsp;&nbsp;userLogout = (events$: Observable&lt;any&gt;) =&gt; {<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;return events$.pipe(<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ofType(UserLoggedOutEvent),<br>
+          @Injectable()<br />
+          export class UserLogoutSaga {<br />
+          &nbsp;&nbsp;@Saga()<br />
+          &nbsp;&nbsp;userLogout = (events$: Observable&lt;any&gt;) =&gt; {<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;return events$.pipe(<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ofType(UserLoggedOutEvent),<br />
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map(event =&gt; new
-          GoogleLogoutCommand(event.userId))<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;);<br>
-          &nbsp;&nbsp;}<br>
+          GoogleLogoutCommand(event.userId))<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;);<br />
+          &nbsp;&nbsp;}<br />
           }
         </div>
 
@@ -810,37 +631,25 @@
         </ul>
       </div>
 
-      <!-- Slide 10 발표자 스크립트
-      🎯 발표자 스크립트:
-      - Saga 패턴의 종류: "Orchestration vs Choreography 중 이 프로젝트는 Choreography 방식을 사용합니다."
-      - 분산 Saga와의 차이: "분산 Saga는 여러 서비스 간 트랜잭션 관리이지만, 여기서는 단일 서비스 내 이벤트 워크플로우입니다."
-      - 실제 사용 사례: "사용자 로그아웃 시 Google OAuth 토큰 무효화를 비동기로 처리합니다."
-
-      💡 면접 예상 질문: "Saga 패턴의 실패 처리는?"
-      답변: "보상 트랜잭션(Compensating Transaction)을 통해 이전 상태로 롤백하거나, 재시도 로직을 구현할 수 있습니다."
-
-      🔧 기술적 세부사항: RxJS ofType 연산자, 이벤트 필터링, 메모리 기반 이벤트 스토어
-      -->
-
       <!-- Slide 11: OAuth 2.0 인증 -->
       <div class="slide">
         <h2>🔐 OAuth 2.0 인증</h2>
 
         <h3>🛡️ 구현 예시</h3>
         <div class="code-block">
-          @Injectable()<br>
+          @Injectable()<br />
           export class GoogleStrategy extends PassportStrategy(Strategy,
-          'google') {<br>
+          'google') {<br />
           &nbsp;&nbsp;async validate(accessToken: string, refreshToken: string,
-          profile: any) {<br>
+          profile: any) {<br />
           &nbsp;&nbsp;&nbsp;&nbsp;const { id, emails, displayName } =
-          profile;<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;return {<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;googleId: id,<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;email: emails[0].value,<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: displayName<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;};<br>
-          &nbsp;&nbsp;}<br>
+          profile;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;return {<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;googleId: id,<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;email: emails[0].value,<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: displayName<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;};<br />
+          &nbsp;&nbsp;}<br />
           }
         </div>
 
@@ -861,18 +670,6 @@
         </p>
       </div>
 
-      <!-- Slide 11 발표자 스크립트
-      🎯 발표자 스크립트:
-      - OAuth 2.0 Flow: "Authorization Code Grant 방식을 사용하여 가장 안전한 인증 플로우를 구현했습니다."
-      - 토큰 저장 전략: "Access Token은 응답 JSON으로 전달하여 클라이언트 메모리에 저장하고, Refresh Token은 HttpOnly Cookie에 저장하여 XSS 공격을 방지합니다."
-      - 토큰 회전 전략: "매번 새로운 Refresh Token을 발급하여 토큰 탈취 시 피해를 최소화합니다."
-
-      💡 면접 예상 질문: "Access Token을 쿠키에 저장하지 않는 이유는?"
-      답변: "HttpOnly 쿠키는 JavaScript로 접근할 수 없어 API 호출 시 Authorization 헤더에 포함할 수 없습니다. 따라서 Access Token은 메모리에 저장하고 Refresh Token만 쿠키에 저장합니다."
-
-      🔧 기술적 세부사항: Passport.js 전략 패턴, JWT HS256 알고리즘, Cookie SameSite=strict, Refresh Token Rotation
-      -->
-
       <!-- Slide 12: Optimistic Lock -->
       <div class="slide">
         <h2>🔒 Optimistic Lock</h2>
@@ -887,37 +684,20 @@
 
         <h3>⚙️ TypeORM 구현</h3>
         <div class="code-block">
-          @Entity()<br>
-          export class BaseEntity {<br>
-          &nbsp;&nbsp;@VersionColumn()<br>
-          &nbsp;&nbsp;version: number;<br>
-          }<br>
-          <br>
-          // Repository에서 자동 처리<br>
-          public async save(user: User): Promise&lt;void&gt; {<br>
-          &nbsp;&nbsp;user.setVersion(user.getVersion() + 1);<br>
-          &nbsp;&nbsp;const userEntity = this.userMapper.toEntity(user);<br>
+          @Entity()<br />
+          export class BaseEntity {<br />
+          &nbsp;&nbsp;@VersionColumn()<br />
+          &nbsp;&nbsp;version: number;<br />
+          }<br />
+          <br />
+          // Repository에서 자동 처리<br />
+          public async save(user: User): Promise&lt;void&gt; {<br />
+          &nbsp;&nbsp;user.setVersion(user.getVersion() + 1);<br />
+          &nbsp;&nbsp;const userEntity = this.userMapper.toEntity(user);<br />
           &nbsp;&nbsp;await this.userRepository.save(userEntity); // 자동
-          version 체크<br>
+          version 체크<br />
           }
         </div>
-
-        <!--
-        🎯 발표자 스크립트:
-        - 선택 이유: "사용자 정보 수정은 빈도가 낮아 낙관적 잠금이 적합합니다. 높은 동시성을 유지하면서 데이터 무결성을 보장합니다."
-        - TypeORM 자동 처리: "@VersionColumn이 자동으로 WHERE 조건에 버전을 포함하여 충돌을 감지합니다."
-        - 충돌 처리 전략: "OptimisticLockVersionMismatchError 발생 시 재시도 로직을 구현할 수 있습니다."
-
-        💡 면접 예상 질문: "Lost Update 문제는 어떻게 해결하나요?"
-        답변: "Lost Update는 두 트랜잭션이 동시에 같은 데이터를 수정할 때 발생하는 문제입니다. 해결 방법으로는 1) 낙관적 잠금: 버전 컬럼이나 타임스탬프로 충돌 감지 후 재시도, 2) 비관적 잠금: SELECT FOR UPDATE로 행 레벨 락 설정, 3) CAS(Compare-And-Swap): 원자적 연산으로 값 비교 후 업데이트, 4) 트랜잭션 격리 수준 조정: SERIALIZABLE로 설정하여 완전 격리. 우리 프로젝트에서는 사용자 정보 수정 빈도가 낮아 낙관적 잠금을 선택했습니다."
-
-        🔧 기술적 세부사항: MySQL InnoDB 엔진의 MVCC, 트랜잭션 격리 수준, 데드락 방지
-
-        pessimistic lock은 db에 직접 lock을 걸어서, 동시성이 낮다. 
-        데이터의 무결성이 중요하고, 충돌이 많이 발생하여 잦은 롤백으로 인한 효율성 문제가 발생하는 곳에 사용
-        optimistic lock은 버전 컬럼을 사용하여, 동시성이 높다.
-        데이터 충돌이 자주 일어나지 않을것이라고 예상되는 곳에 사용
-        -->
       </div>
 
       <!-- Slide 13: Docker 컨테이너화 -->
@@ -934,42 +714,32 @@
 
         <h3>🏗️ Dockerfile 구조</h3>
         <div class="code-block">
-          # Builder Stage<br>
-          FROM node:22-alpine AS builder<br>
-          RUN npm i -g pnpm<br>
-          COPY package.json pnpm-lock.yaml ./<br>
-          RUN pnpm install<br>
-          COPY . .<br>
-          RUN pnpm run build:all<br>
-          <br>
-          # Auth Service<br>
-          FROM node:22-alpine AS auth<br>
-          COPY --from=builder /app/dist/apps/auth ./dist<br>
-          CMD ["node", "dist/src/main.js"]<br>
-          <br>
-          # User gRPC Service<br>
-          FROM node:22-alpine AS user-grpc<br>
-          COPY --from=builder /app/proto ./proto<br>
+          # Builder Stage<br />
+          FROM node:22-alpine AS builder<br />
+          RUN npm i -g pnpm<br />
+          COPY package.json pnpm-lock.yaml ./<br />
+          RUN pnpm install<br />
+          COPY . .<br />
+          RUN pnpm run build:all<br />
+          <br />
+          # Auth Service<br />
+          FROM node:22-alpine AS auth<br />
+          COPY --from=builder /app/dist/apps/auth ./dist<br />
+          CMD ["node", "dist/src/main.js"]<br />
+          <br />
+          # User gRPC Service<br />
+          FROM node:22-alpine AS user-grpc<br />
+          COPY --from=builder /app/proto ./proto<br />
           EXPOSE 5000
         </div>
 
         <p>
-          <strong>Docker 멀티스테이지 빌드로 최종 이미지에 꼭 필요한 요소만
-            포함</strong>
+          <strong
+            >Docker 멀티스테이지 빌드로 최종 이미지에 꼭 필요한 요소만
+            포함</strong
+          >
         </p>
       </div>
-
-      <!-- Slide 13 발표자 스크립트
-      🎯 발표자 스크립트:
-      - 멀티스테이지 빌드: "빌드 도구와 런타임을 분리하여 최종 이미지 크기를 최소화했습니다. Builder 스테이지에서 모든 서비스를 빌드하고, 각 서비스별로 필요한 파일만 복사합니다."
-      - Alpine Linux: "일반 Node.js 이미지 대비 약 10배 작은 크기로 보안 취약점도 적습니다."
-      - 서비스 분리: "각 마이크로서비스가 독립적인 컨테이너로 실행되어 개별 스케일링과 배포가 가능합니다."
-
-      💡 면접 예상 질문: "Docker 멀티스테이지 빌드의 장점은?"
-      답변: "1) 이미지 크기 최적화: 빌드 도구와 소스코드를 최종 이미지에서 제외하여 크기 감소, 2) 보안 강화: 불필요한 도구 제거로 공격 표면 축소, 3) 빌드 캐싱: 각 스테이지별 캐싱으로 빌드 시간 단축, 4) 환경 일관성: 개발/스테이징/프로덕션 환경 동일화. 특히 Node.js 프로젝트에서 node_modules와 소스코드를 분리하여 수백MB 절약 가능합니다."
-
-      🔧 기술적 세부사항: Layer caching, .dockerignore 최적화, Health check 구현, pnpm 캐시 활용
-      -->
 
       <!-- Slide 14: Docker Compose 오케스트레이션 -->
       <div class="slide">
@@ -977,46 +747,34 @@
 
         <h3>🏗️ 서비스 구성</h3>
         <div class="code-block">
-          services:<br>
-          &nbsp;&nbsp;# 1. 인증 서비스 (외부 진입점)<br>
-          &nbsp;&nbsp;auth:<br>
+          services:<br />
+          &nbsp;&nbsp;# 1. 인증 서비스 (외부 진입점)<br />
+          &nbsp;&nbsp;auth:<br />
           &nbsp;&nbsp;&nbsp;&nbsp;ports: ['3000:3000']&nbsp;&nbsp;# 외부 접근
-          가능<br>
+          가능<br />
           &nbsp;&nbsp;&nbsp;&nbsp;depends_on: [db, user-grpc]&nbsp;&nbsp;# DB와
-          user-grpc 필요<br>
-          <br>
-          &nbsp;&nbsp;# 2. 사용자 HTTP API<br>
-          &nbsp;&nbsp;user:<br>
+          user-grpc 필요<br />
+          <br />
+          &nbsp;&nbsp;# 2. 사용자 HTTP API<br />
+          &nbsp;&nbsp;user:<br />
           &nbsp;&nbsp;&nbsp;&nbsp;ports: ['3001:3001']&nbsp;&nbsp;# 외부 접근
-          가능<br>
+          가능<br />
           &nbsp;&nbsp;&nbsp;&nbsp;depends_on:
-          [db]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# DB만 필요<br>
-          <br>
-          &nbsp;&nbsp;# 3. 사용자 gRPC 서비스 (내부 통신용)<br>
-          &nbsp;&nbsp;user-grpc:<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;# 포트 노출 없음 = 내부 통신만<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;depends_on: [db]<br>
-          <br>
-          &nbsp;&nbsp;# 4. 데이터베이스<br>
-          &nbsp;&nbsp;db:<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;image: mariadb:11.6.2<br>
+          [db]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# DB만 필요<br />
+          <br />
+          &nbsp;&nbsp;# 3. 사용자 gRPC 서비스 (내부 통신용)<br />
+          &nbsp;&nbsp;user-grpc:<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;# 포트 노출 없음 = 내부 통신만<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;depends_on: [db]<br />
+          <br />
+          &nbsp;&nbsp;# 4. 데이터베이스<br />
+          &nbsp;&nbsp;db:<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;image: mariadb:11.6.2<br />
           &nbsp;&nbsp;&nbsp;&nbsp;volumes: [dbdata:/var/lib/mysql]&nbsp;&nbsp;#
-          데이터 영속성<br>
+          데이터 영속성<br />
           &nbsp;&nbsp;&nbsp;&nbsp;healthcheck: # 준비 상태 확인
         </div>
       </div>
-
-      <!-- Slide 14 발표자 스크립트
-      🎯 발표자 스크립트:
-      - 서비스 구성: "4개의 독립적인 서비스가 각각 다른 포트에서 실행됩니다. auth와 user는 외부 접근 가능하고, user-grpc는 내부 통신 전용입니다."
-      - 의존성 관리: "depends_on으로 서비스 시작 순서를 제어하고, 헬스체크로 MariaDB가 완전히 준비된 후 애플리케이션 서비스가 시작됩니다."
-      - 네트워크 격리: "Docker Compose가 자동으로 생성하는 브리지 네트워크에서 서비스명으로 통신합니다."
-
-      💡 면접 예상 질문: "Docker Compose와 Kubernetes의 차이점은?"
-      답변: "Docker Compose는 단일 호스트에서 여러 컨테이너를 관리하는 도구로, 주로 개발 환경에서 사용됩니다. Kubernetes는 클러스터 환경에서 컨테이너를 오케스트레이션하는 플랫폼으로, 자동 스케일링, 로드밸런싱, 자가 치유 등 프로덕션 기능을 제공합니다. Docker Compose = 미니 쿠버네티스라고 볼 수 있습니다."
-
-      🔧 기술적 세부사항: 네트워크 격리, 볼륨 마운트, 환경 변수 주입, 헬스체크 구현
-      -->
 
       <!-- Slide 15: 결론 -->
       <div class="slide">
@@ -1048,41 +806,22 @@
         <div class="stats-grid">
           <div class="stat-card">
             <span class="stat-number">📊</span>
-            <p>모니터링<br>&amp; 로깅</p>
+            <p>모니터링<br />&amp; 로깅</p>
           </div>
           <div class="stat-card">
             <span class="stat-number">🧪</span>
-            <p>테스트<br>커버리지</p>
+            <p>테스트<br />커버리지</p>
           </div>
           <div class="stat-card">
             <span class="stat-number">🔄</span>
-            <p>CI/CD<br>파이프라인</p>
+            <p>CI/CD<br />파이프라인</p>
           </div>
           <div class="stat-card">
             <span class="stat-number">☁️</span>
-            <p>클라우드<br>배포</p>
+            <p>클라우드<br />배포</p>
           </div>
         </div>
-
-        <div style="text-align: center; margin-top: 3rem">
-          <h3>🙏 감사합니다!</h3>
-          <p style="font-size: 1.2rem; margin-top: 1rem">
-            질문이 있으시면 언제든지 말씀해 주세요! 🤗
-          </p>
-        </div>
       </div>
-
-      <!-- Slide 15 발표자 스크립트
-      🎯 발표자 스크립트:
-      - 프로젝트 회고: "이 프로젝트를 통해 엔터프라이즈급 백엔드 아키텍처의 복잡성과 트레이드오프를 경험했습니다."
-      - 기술적 성장: "단순한 CRUD에서 벗어나 도메인 중심 설계와 이벤트 기반 아키텍처를 구현했습니다."
-      - 실무 적용: "이 템플릿은 향후 마이크로서비스 프로젝트의 기반으로 활용할 수 있습니다."
-
-      💡 면접 예상 질문: "이 프로젝트에서 가장 어려웠던 부분은?"
-      답변: "서비스 간 트랜잭션 관리와 이벤트 기반 일관성 보장이 가장 도전적이었습니다."
-
-      🔧 향후 계획: Kubernetes 배포, 분산 추적, 서킷 브레이커 패턴, API Gateway 도입
-      -->
     </div>
 
     <script>
@@ -1124,6 +863,5 @@
       // 초기 상태 설정
       showSlide(0);
     </script>
-  
-
-</body></html>
+  </body>
+</html>
