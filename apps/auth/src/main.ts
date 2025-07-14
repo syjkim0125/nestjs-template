@@ -30,7 +30,16 @@ async function bootstrap() {
     })
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api/docs', app, documentFactory);
+  SwaggerModule.setup('api/docs', app, documentFactory, {
+    swaggerOptions: {
+      oauth2RedirectUrl: 'http://localhost:3000/api/docs/oauth2-redirect.html',
+      initOAuth: {
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        scopes: ['openid'],
+        usePkceWithAuthorizationCodeGrant: true,
+      },
+    },
+  });
 
   app.enableCors({ origin: true, credentials: true });
   app.use(cookieParser());
