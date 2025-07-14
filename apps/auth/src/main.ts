@@ -4,6 +4,11 @@ import * as cookieParser from 'cookie-parser';
 
 import { AuthModule } from './auth.module';
 
+/**
+ * Initializes and starts the NestJS authentication service with Swagger API documentation, OAuth2 integration, CORS, and cookie parsing.
+ *
+ * Configures Swagger UI with OAuth2 client settings for Google authentication and serves the documentation at `/api/docs`. The application listens on the port specified by the `AUTH_PORT` environment variable or defaults to 3000.
+ */
 async function bootstrap() {
   const app = await NestFactory.create(AuthModule);
 
