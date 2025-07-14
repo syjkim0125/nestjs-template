@@ -37,9 +37,9 @@ async function bootstrap() {
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, documentFactory, {
     swaggerOptions: {
-      oauth2RedirectUrl: 'http://localhost:3000/api/docs/oauth2-redirect.html',
+      oauth2RedirectUrl: `${process.env.BASE_URL || 'http://localhost:3000'}/api/docs/oauth2-redirect.html`,
       initOAuth: {
-        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientId: process.env.GOOGLE_CLIENT_ID || '',
         scopes: ['openid'],
         usePkceWithAuthorizationCodeGrant: true,
       },
