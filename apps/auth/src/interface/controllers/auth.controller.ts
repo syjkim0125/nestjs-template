@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 import { CommandBus } from '@nestjs/cqrs';
+import { ApiCookieAuth, ApiOAuth2, ApiTags } from '@nestjs/swagger';
 
 import { Public } from '@common/decorators/public.decorator';
 import { RefreshTokenNotFoundException } from '@auth/constant/exception';
@@ -24,6 +25,7 @@ import { GoogleLoginCommand } from '@auth/application/commands/impl/google-login
 import { IssueRefreshTokenCommand } from '@auth/application/commands/impl/issue-refresh-token.command';
 import { LogoutCommand } from '@auth/application/commands/impl/logout.command';
 
+@ApiTags('auth')
 @Controller('auth')
 @UseFilters(RefreshTokenInvalidationFilter)
 export class AuthController {
@@ -31,6 +33,7 @@ export class AuthController {
 
   // 1) 구글 로그인 진입점
   @Get('google')
+  @ApiOAuth2(['google'])
   @Public()
   @UseGuards(GoogleAuthGuard)
   async googleAuth() {
@@ -53,6 +56,7 @@ export class AuthController {
   }
 
   @Post('refresh')
+  @ApiCookieAuth('refreshToken')
   @Public()
   @UseInterceptors(SetRefreshTokenInterceptor)
   async refresh(@Req() req: Request): Promise<IssueRefreshTokenResponseDto> {
@@ -67,6 +71,7 @@ export class AuthController {
   }
 
   @Post('logout')
+  @ApiCookieAuth('refreshToken')
   @Public()
   async logout(@Req() req: Request): Promise<{ message: string }> {
     const refreshToken = req.cookies['refreshToken'];
