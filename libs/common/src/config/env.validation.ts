@@ -13,6 +13,7 @@ export const envSchema = z.object({
     .transform((val) => val === 'true')
     .default('false'),
   JWT_SECRET: z.string(),
+  JWT_REFRESH_SECRET: z.string(),
   JWT_EXPIRES_IN: z.string().transform(Number).default('3600'),
   JWT_REFRESH_TOKEN_EXPIRES_IN: z.string().transform(Number).default('604800'),
   GOOGLE_CLIENT_ID: z.string(),
