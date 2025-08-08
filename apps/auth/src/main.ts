@@ -27,8 +27,8 @@ async function bootstrap() {
       type: 'oauth2',
       flows: {
         authorizationCode: {
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/v2/auth',
-          tokenUrl: 'https://oauth2.googleapis.com/token',
+          authorizationUrl: process.env.AUTHORIZATION_URL || '',
+          tokenUrl: process.env.TOKEN_URL || '',
           scopes: { openid: 'OpenID scope' },
         },
       },
