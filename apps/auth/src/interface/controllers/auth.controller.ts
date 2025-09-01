@@ -9,7 +9,12 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 import { CommandBus } from '@nestjs/cqrs';
-import { ApiCookieAuth, ApiOAuth2, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCookieAuth,
+  ApiExcludeEndpoint,
+  ApiOAuth2,
+  ApiTags,
+} from '@nestjs/swagger';
 
 import { Public } from '@common/decorators/public.decorator';
 import { RefreshTokenNotFoundException } from '@auth/constant/exception';
@@ -33,7 +38,7 @@ export class AuthController {
 
   // 1) 구글 로그인 진입점
   @Get('google')
-  @ApiOAuth2(['google'])
+  @ApiExcludeEndpoint()
   @Public()
   @UseGuards(GoogleAuthGuard)
   async googleAuth() {
@@ -42,6 +47,7 @@ export class AuthController {
 
   // 2) 구글 로그인 콜백
   @Get('google/callback')
+  @ApiExcludeEndpoint()
   @Public()
   @UseGuards(GoogleAuthGuard)
   @UseInterceptors(SetRefreshTokenInterceptor)

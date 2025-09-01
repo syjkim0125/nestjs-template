@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     ports:
-      - '3000:3000'
+      - '8080:8080'
     depends_on:
       db:
         condition: service_healthy
@@ -53,7 +53,7 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      test: ['CMD', 'healthcheck.sh', '--connect', '--innodb_initialized']
       start_period: 10s
       interval: 5s
       timeout: 5s

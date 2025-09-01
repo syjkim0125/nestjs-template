@@ -27,9 +27,9 @@ async function bootstrap() {
       type: 'oauth2',
       flows: {
         authorizationCode: {
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/v2/auth',
-          tokenUrl: 'https://oauth2.googleapis.com/token',
-          scopes: { openid: 'OpenID scope' },
+          authorizationUrl: `${process.env.BASE_URL || 'http://localhost:8080'}/auth/google`,
+          tokenUrl: `${process.env.BASE_URL || 'http://localhost:8080'}/auth/google/callback`,
+          scopes: { openid: 'OpenID scope', profile: 'Profile scope', email: 'Email scope' },
         },
       },
     })
@@ -40,6 +40,7 @@ async function bootstrap() {
       oauth2RedirectUrl: `${process.env.BASE_URL || 'http://localhost:3000'}/api/docs/oauth2-redirect.html`,
       initOAuth: {
         clientId: process.env.GOOGLE_CLIENT_ID || '',
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
         scopes: ['openid'],
         usePkceWithAuthorizationCodeGrant: true,
       },
