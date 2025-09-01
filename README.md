@@ -50,3 +50,7 @@ $ protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./ --ts
 1. auth service
 
 localhost:8080/api/docs
+
+2. user service
+
+localhost:3001/api/docs

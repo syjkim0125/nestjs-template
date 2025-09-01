@@ -1,11 +1,14 @@
 import { Controller, Get, Param, Req } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { AuthRequest } from '@user/interface/types/authenticated.request';
 import { GetUserResponseDto } from '@user/interface/controllers/http/dtos/get-user-response.dto';
 
 import { GetUserQuery } from '@user/application/queries/impl/get-user.query';
 
+@ApiTags('user')
+@ApiBearerAuth()
 @Controller('user')
 export class UserController {
   constructor(

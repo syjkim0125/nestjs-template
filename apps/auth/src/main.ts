@@ -29,7 +29,11 @@ async function bootstrap() {
         authorizationCode: {
           authorizationUrl: `${process.env.BASE_URL || 'http://localhost:8080'}/auth/google`,
           tokenUrl: `${process.env.BASE_URL || 'http://localhost:8080'}/auth/google/callback`,
-          scopes: { openid: 'OpenID scope', profile: 'Profile scope', email: 'Email scope' },
+          scopes: {
+            openid: 'OpenID scope',
+            profile: 'Profile scope',
+            email: 'Email scope',
+          },
         },
       },
     })
@@ -37,7 +41,7 @@ async function bootstrap() {
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, documentFactory, {
     swaggerOptions: {
-      oauth2RedirectUrl: `${process.env.BASE_URL || 'http://localhost:3000'}/api/docs/oauth2-redirect.html`,
+      oauth2RedirectUrl: `${process.env.BASE_URL || 'http://localhost:8080'}/api/docs/oauth2-redirect.html`,
       initOAuth: {
         clientId: process.env.GOOGLE_CLIENT_ID || '',
         clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
@@ -47,7 +51,6 @@ async function bootstrap() {
     },
   });
 
-  app.enableCors({ origin: true, credentials: true });
   app.use(cookieParser());
   await app.listen(process.env.AUTH_PORT ?? 3000);
 }
