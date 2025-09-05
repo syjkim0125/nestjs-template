@@ -23,6 +23,8 @@ import { AuthenticatedRequest } from '@auth/interface/types/authenticated.reques
 import { GoogleAuthGuard } from '@auth/interface/guards/google-auth.guard';
 import { RefreshTokenInvalidationFilter } from '@auth/interface/filters/refresh-token-invalidate.filter';
 import { SetRefreshTokenInterceptor } from '@auth/interface/interceptors/refresh-token.interceptor';
+import { SetTempAccessTokenInterceptor } from '@auth/interface/interceptors/temp-access-token.interceptor';
+import { RedirectInterceptor } from '@auth/interface/interceptors/redirect.interceptor';
 import { GoogleLoginResponseDto } from '@auth/interface/controllers/dtos/google-login-response.dto';
 import { IssueRefreshTokenResponseDto } from '@auth/interface/controllers/dtos/issue-refresh-token-response.dto';
 
@@ -50,21 +52,24 @@ export class AuthController {
   @ApiExcludeEndpoint()
   @Public()
   @UseGuards(GoogleAuthGuard)
-  @UseInterceptors(SetRefreshTokenInterceptor)
+  @UseInterceptors(
+    RedirectInterceptor,
+    SetTempAccessTokenInterceptor,
+    SetRefreshTokenInterceptor,
+  )
   async googleAuthRedirect(
     @Req() req: AuthenticatedRequest,
   ): Promise<GoogleLoginResponseDto> {
     // Passport Strategy에서 done(null, user)로 넘겨준 user가 req.user로 들어있음
     const user = req.user;
 
-    // 이후 프론트엔드로 리다이렉트하거나, 토큰을 쿠키로 전달, or JSON으로 내려주는 방식 등 고려
     return await this.commandBus.execute(new GoogleLoginCommand(user));
   }
 
   @Post('refresh')
   @ApiCookieAuth('refreshToken')
   @Public()
-  @UseInterceptors(SetRefreshTokenInterceptor)
+  @UseInterceptors(SetTempAccessTokenInterceptor, SetRefreshTokenInterceptor)
   async refresh(@Req() req: Request): Promise<IssueRefreshTokenResponseDto> {
     const refreshToken = req.cookies['refreshToken'];
     if (!refreshToken) {

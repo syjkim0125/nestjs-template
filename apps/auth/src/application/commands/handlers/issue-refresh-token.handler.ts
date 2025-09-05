@@ -31,7 +31,6 @@ export class IssueRefreshTokenHandler
     const payload = this.jwtProvider.verifyRefreshToken(refreshToken);
     const sessionId = payload.sessionId;
     const userId = payload.sub;
-    const email = payload.email;
 
     // 2) DB에서 auth 조회 & hashedRefreshToken 대조
     const auth = await this.authService.findAndValidateSession(sessionId);
@@ -43,7 +42,6 @@ export class IssueRefreshTokenHandler
 
     const tokens = await this.jwtProvider.issueTokens({
       sub: userId,
-      email: email,
       sessionId: auth.getId(),
     });
 

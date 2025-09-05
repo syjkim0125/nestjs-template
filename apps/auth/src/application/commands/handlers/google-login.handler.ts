@@ -42,13 +42,14 @@ export class GoogleLoginHandler implements ICommandHandler<GoogleLoginCommand> {
     name: string,
   ): Promise<LoginResult> {
     // 1) 유저 찾거나 생성
-    const user = await this.userGrpcPort.findOrCreateUser(googleId, email, name);
+    const user = await this.userGrpcPort.findOrCreateUser(
+      googleId,
+      email,
+      name,
+    );
 
     const expiresInSeconds = this.jwtProvider.getRefreshTokenExpiresInSeconds();
-    const auth = await this.authService.createAuth(
-      user.id,
-      expiresInSeconds,
-    );
+    const auth = await this.authService.createAuth(user.id, expiresInSeconds);
 
     const oauth = await this.oauthService.createOauth(
       user.id,
@@ -60,7 +61,6 @@ export class GoogleLoginHandler implements ICommandHandler<GoogleLoginCommand> {
     // 2) 토큰 생성
     const tokens = await this.jwtProvider.issueTokens({
       sub: user.id,
-      email: user.email,
       sessionId: auth.getId(),
     });
 

@@ -1,6 +1,5 @@
 export type TokenPayload = {
   sub: string;
-  email: string;
   sessionId: string;
 };
 
